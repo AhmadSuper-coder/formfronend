@@ -3,7 +3,7 @@ import axios from 'axios';
 
 function Allform() {
   const [userData,setUserData]=useState([]);
-  const url="http://localhost:5000"
+  const url="https://formbackend-rpyp.onrender.com"
 
   useEffect(()=>{
     async function fetchData(){

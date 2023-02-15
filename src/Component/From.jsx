@@ -13,7 +13,7 @@ function From() {
     const [formData,setFormData]=useState(fData);
     const {name,dob,email,phone}=useState(fData);
     const Navigate=useNavigate();
-    const url="http://localhost:5000"
+    const url="https://formbackend-rpyp.onrender.com"
 
     const handleChange=(event)=>{
         setFormData({...formData,[event.target.name]:event.target.value})
