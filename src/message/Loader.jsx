@@ -10,9 +10,9 @@ function Loader() {
     <>
         <div className="container">
             <div className="row mt-5">
-                <div className="col-md-1 m-auto">
-                    <div className="mt-5 ">
-                        <ClockLoader color={color} loading={loading}  size={50} />
+                <div className="col-1 m-auto">
+                    <div className="mt-5">
+                        <ClockLoader color={color} loading={loading}  size={40} />
                     </div>
                 </div>
             </div>

@@ -89,7 +89,7 @@ function From() {
 
                             <div className="mb-3">
                             <label className="form-label">Enter Your Age </label>
-                            <input type="date" name="dob" value={formData.dob} className="form-control" onChange={handleChange} />
+                            <input type="date" name="dob" value={formData.dob} placeholder="dd-mm-yyyy" className="form-control" onChange={handleChange} />
                             </div>
 
                             <div className="mb-3">
