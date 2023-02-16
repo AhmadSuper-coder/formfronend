@@ -1,17 +1,27 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
+import Loader from '../message/Loader';
 
 function Allform() {
   const [userData,setUserData]=useState([]);
+  const [loading, setLoading] = useState();
+  // const [error, setError] = useState();
   const url="https://formbackend-rpyp.onrender.com"
 
   useEffect(()=>{
     async function fetchData(){
-      const userD= await axios.get(`${url}/alldata`);
-      const response=userD.data
-      setUserData(response);
-      console.log(userData);
-      console.log("Hellow");
+      try{
+        setLoading(true);
+        const userD= await axios.get(`${url}/alldata`);
+        const response=userD.data
+        setUserData(response);
+        console.log(userData);
+        console.log("Hellow");
+        setLoading(false);
+      }catch(e){
+
+      }
+
     }
     fetchData();
   
@@ -30,7 +40,9 @@ function Allform() {
 
 
         <div className="row">
-          <div className="col-md-10 text-center m-auto">
+          {
+            loading?(<Loader />):(
+              <div className="col-md-10 text-center m-auto">
             <table className="table">
               <thead>
                 <tr>
@@ -56,6 +68,8 @@ function Allform() {
               </tbody>
             </table>
           </div>
+            )
+          }
         </div>
 
 

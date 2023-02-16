@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import axios from "axios"
 import { useNavigate } from 'react-router-dom';
+import Loader from '../message/Loader';
 
 var fData={
     name:"",
@@ -12,6 +13,7 @@ var fData={
 function From() {
     const [formData,setFormData]=useState(fData);
     const {name,dob,email,phone}=useState(fData);
+    const[loading,setLoading]=useState(false);
     const Navigate=useNavigate();
     const url="https://formbackend-rpyp.onrender.com"
 
@@ -45,12 +47,12 @@ function From() {
                 alert('Please enter a valid email address.');
                 return;
             }
-
+            setLoading(true);
             const response=await axios.post(`${url}/user`,formData);
             
-            console.log(response);
             if (response.data==="created"){
                 setFormData(fData);
+                setLoading(false);
                 Navigate("/allform")
                 console.log("submited")
             }else{
@@ -77,31 +79,35 @@ function From() {
 
             <div className="row">
                 <div className="col-md-4 col-sm-6 col-8 m-auto">
-                    <form onSubmit={submitForm} noValidate>
-                        <div className="mb-3">
-                        <label className="form-label">Enter Your Name </label>
-                        <input type="text" name="name" value={formData.name} className="form-control" placeholder="Name" onChange={handleChange} />
-                        </div>
+                    {
+                        loading?(<Loader/>):(
+                            <form onSubmit={submitForm} noValidate>
+                            <div className="mb-3">
+                            <label className="form-label">Enter Your Name </label>
+                            <input type="text" name="name" value={formData.name} className="form-control" placeholder="Name" onChange={handleChange} />
+                            </div>
 
-                        <div className="mb-3">
-                        <label className="form-label">Enter Your Age </label>
-                        <input type="date" name="dob" value={formData.dob} className="form-control" onChange={handleChange} />
-                        </div>
+                            <div className="mb-3">
+                            <label className="form-label">Enter Your Age </label>
+                            <input type="date" name="dob" value={formData.dob} className="form-control" onChange={handleChange} />
+                            </div>
 
-                        <div className="mb-3">
-                        <label className="form-label">Enter Your Email </label>
-                        <input type="email" name="email" value={formData.email} className="form-control" placeholder="Email" onChange={handleChange} />
-                        </div>
+                            <div className="mb-3">
+                            <label className="form-label">Enter Your Email </label>
+                            <input type="email" name="email" value={formData.email} className="form-control" placeholder="Email" onChange={handleChange} />
+                            </div>
 
-                        <div className="mb-3">
-                        <label className="form-label">Enter Your Phone </label>
-                        <input type="text" name="phone" value={formData.phone}  className="form-control" id="formGroupExampleInput2" placeholder="Phone" onChange={handleChange} />
-                        </div>
+                            <div className="mb-3">
+                            <label className="form-label">Enter Your Phone </label>
+                            <input type="text" name="phone" value={formData.phone}  className="form-control" id="formGroupExampleInput2" placeholder="Phone" onChange={handleChange} />
+                            </div>
 
 
-                        <input type="submit" className='btn btn-success btn-sm' value="submit" />
+                            <input type="submit" className='btn btn-success btn-sm' value="submit" />
 
-                    </form>
+                        </form>
+                        )
+                    }
                 </div>
             </div>
         </div>
